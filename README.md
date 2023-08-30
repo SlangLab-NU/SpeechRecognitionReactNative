@@ -1,72 +1,37 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Getting Started with Development 
 
-# Getting Started
+## Step 1: Install Development Environment
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+You need a Mac for this project as it is iOS focused and requires compiling of native iOS code.
+Go to https://reactnative.dev/docs/environment-setup and follow **React Native CLI Quickstart** guide to install necessary tools including: node, watchman, Xcode and CocoaPods. You can skip iOS Simulator as the app has not been tested to work on simulators.
 
-## Step 1: Start the Metro Server
+## Step 2: Install the Dependencies for the App
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
-
-To start Metro, run the following command from the _root_ of your React Native project:
-
+navigate to the root directory of the app and run
 ```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
+npm install
 ```
+navigate to the ios directory of the app and run
+```bash
+pod install
+```
+Download mobile optimized wav2vec model [here](https://pytorch-mobile-demo-apps.s3.us-east-2.amazonaws.com/wav2vec2.ptl) and place it in the ios directory. You can also follow [this](https://github.com/pytorch/ios-demo-app/tree/master/SpeechRecognition) documentation to create your own mobile optimized model. 
+**Note** the tutorial use python 3.8 and PyTorch 1.10. If the model you created use a higher version of Pytorch, you will need to bump up the version of Libtorch-Lite used in the app. You can change that in Podfile.
 
-## Step 2: Start your Application
+## Step 3: Build the iOS app and run
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+Double click the `SpeechRecognitionReactNative.xcworkspace` file in iOS folder to open it in Xcode. You will need to prepare your iPhone for development use. Also you need to register a (free) development team with apple to sign your app so it runs on iOS devices. After that you can go to your app workspace in Xcode and find Signing & Capabilities tab to change your team and Bundle Identifier.
 
+Also click on the model ptl file and on file property window to the right make sure it is included in the build Target Membership.
+
+Connect your iPhone to Mac with a data cable and choose it in the target device selector. Click the Play button and Xcode should build and install the app on your device.
+
+If first time install your app, you need to trust the developer on your device. You can go to Settings-General-Profile to do that.
+
+Enjoy 😃
 ### For Android
 
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+The app does not currently support Android as the native module on Android need to be implemented in Java/Kotlin.
 
 # Learn More
 
